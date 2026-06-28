@@ -11,6 +11,7 @@ export default function Book({ poems, onClose }) {
   const [isClosing, setIsClosing] = useState(false);
 
   const touchStartX = useRef(null);
+  const touchStartY = useRef(null);
   const isAnimating = useRef(false);
 
   const goNext = useCallback(() => {
@@ -35,15 +36,21 @@ export default function Book({ poems, onClose }) {
 
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
   };
+  
   const handleTouchEnd = (e) => {
-    if (touchStartX.current == null) return;
-    const delta = e.changedTouches[0].clientX - touchStartX.current;
-    const SWIPE_THRESHOLD = 45;
-    // RTL: سحب لليمين (delta > 0) = الصفحة التالية، سحب لليسار = السابقة
-    if (delta > SWIPE_THRESHOLD) goNext();
-    else if (delta < -SWIPE_THRESHOLD) goPrev();
+    if (touchStartX.current == null || touchStartY.current == null) return;
+    const deltaX = e.changedTouches[0].clientX - touchStartX.current;
+    const deltaY = e.changedTouches[0].clientY - touchStartY.current;
+    
+    // نقلب الصفحة فقط إذا كان السحب أفقياً بوضوح، ولم يتم السحب عمودياً (scroll)
+    if (Math.abs(deltaX) > 40 && Math.abs(deltaY) < 40) {
+      if (deltaX > 0) goNext(); // RTL: right = next
+      else if (deltaX < 0) goPrev(); // RTL: left = prev
+    }
     touchStartX.current = null;
+    touchStartY.current = null;
   };
 
   const progressPct = Math.round((currentPage / maxPage) * 100);
