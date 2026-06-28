@@ -1,13 +1,5 @@
 import "./FinalMessage.css";
 
-const messageText = `زينب،
-
-كل صفحة من هذا الكتاب كانت محاولة صغيرة لأقول لكِ كم أنتِ مهمة.
-الكلمات قد لا تكفي أحياناً، لكنني أردتُ أن أترك لكِ شيئاً يبقى،
-شيئاً تعودين إليه كل مرة تحتاجين أن تتذكري كم أنتِ محبوبة.
-
-كل عام وأنتِ بخير، يا أجمل ما في حياتنا.`;
-
 export default function FinalMessage() {
   return (
     <div className="final-message-container">
@@ -17,7 +9,13 @@ export default function FinalMessage() {
         </span>
         <h2 className="final-title">رسالة لكِ</h2>
         <div className="final-content">
-          <p className="final-text">{messageText}</p>
+          <p className="final-text">
+            زينب،
+            <br /><br />
+            في الختام كل قصيدة انكتبت هون اختيرت خصيصاً الك ومنهم هاي <a href="https://www.youtube.com/results?search_query=كل+القصايد+مروان+خوري" target="_blank" rel="noopener noreferrer" style={{ color: '#d4af37', textDecoration: 'underline' }}>الاغنية</a> ،
+            <br /><br />
+            كل عام وانت بخير وان شاءالله يكون عام سعيد عليك، هاي هدية بسيطة ادري لكن سويتها عشان يكون عندك شي ترجعي الو بس تكوني زعلانة او متضايقة واتمنى تعجبك ❤️
+          </p>
         </div>
       </div>
     </div>
