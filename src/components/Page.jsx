@@ -33,11 +33,15 @@ function PageContent({ content, totalPages }) {
       </span>
       <h2 className="page-poem-title">{content.title}</h2>
       <div className="page-poem-body">
-        {content.lines.map((line, idx) => (
-          <p key={idx} className="page-poem-line">
-            {line}
-          </p>
-        ))}
+        {content.lines.map((line, idx) => {
+          const text = typeof line === "object" ? line.text : line;
+          const isQuote = typeof line === "object" ? line.isQuote : false;
+          return (
+            <p key={idx} className={`page-poem-line ${isQuote ? "page-poem-line--quote" : ""}`}>
+              {text}
+            </p>
+          );
+        })}
       </div>
       <span className="page-number">
         {content.pageNumber} / {totalPages}

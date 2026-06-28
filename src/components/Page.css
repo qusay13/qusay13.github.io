@@ -28,6 +28,19 @@
   background: var(--paper);
   box-shadow: inset 0 0 30px rgba(180, 140, 150, 0.06);
   display: flex;
+  border: 1px solid rgba(201, 160, 99, 0.3); /* Gold border */
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.page-face::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(201, 160, 99, 0.5); /* Inner gold border */
+  pointer-events: none;
+  z-index: 10;
+  border-radius: 2px;
 }
 
 .page-face--front {
@@ -70,17 +83,9 @@
   background-image:
     radial-gradient(ellipse at top right, rgba(136, 14, 79, 0.04), transparent 55%),
     repeating-linear-gradient(0deg, rgba(136, 14, 79, 0.015) 0px, transparent 1px, transparent 26px);
-  border: 1px solid rgba(201, 160, 99, 0.3); /* Gold border */
   box-shadow: inset 0 0 40px rgba(136, 14, 79, 0.03);
   overflow-y: auto;
-}
-
-.page-inner::before {
-  content: "";
-  position: absolute;
-  inset: 8px;
-  border: 1px solid rgba(201, 160, 99, 0.5); /* Inner gold border */
-  pointer-events: none;
+  flex: 1;
 }
 
 .page-inner--blank {
@@ -116,6 +121,16 @@
 
 .page-poem-line {
   margin: 0;
+}
+
+.page-poem-line--quote {
+  font-size: 0.85em;
+  text-align: right;
+  width: 100%;
+  color: var(--rose-deep);
+  font-style: italic;
+  margin-top: 6px;
+  opacity: 0.9;
 }
 
 .page-number {
