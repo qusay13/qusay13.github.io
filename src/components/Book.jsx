@@ -68,16 +68,22 @@ export default function Book({ poems, onClose }) {
       >
         <div className="book-spine-shadow" aria-hidden="true" />
 
-        {/* الأوراق الفعلية للقصائد */}
-        {pages.map((page, idx) => (
-          <Page
-            key={idx}
-            content={page}
-            totalPages={maxPage}
-            isFlipped={idx < currentPage}
-            zIndex={idx < currentPage ? idx : pages.length - idx}
-          />
-        ))}
+        {/* الأوراق الفعلية للقصائد - نعرض فقط الصفحات القريبة لتخفيف الضغط على معالج الجوال (GPU) */}
+        {pages.map((page, idx) => {
+          // Render only pages close to current to prevent mobile crash
+          const isVisible = Math.abs(idx - currentPage) <= 2 || idx === maxPage - 1;
+          if (!isVisible) return null;
+
+          return (
+            <Page
+              key={idx}
+              content={page}
+              totalPages={maxPage}
+              isFlipped={idx < currentPage}
+              zIndex={idx < currentPage ? idx : pages.length - idx}
+            />
+          );
+        })}
 
         <span className="book-ribbon-mark" aria-hidden="true" />
       </div>
