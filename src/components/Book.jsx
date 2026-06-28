@@ -57,7 +57,7 @@ export default function Book({ poems, onClose }) {
 
   return (
     <div className={`book-scene ${isClosing ? "is-closing" : ""}`}>
-      <button className="close-btn" onClick={onClose} aria-label="إغلاق الكتاب والعودة للغلاف">
+      <button type="button" className="close-btn" onClick={onClose} aria-label="إغلاق الكتاب والعودة للغلاف">
         ✕
       </button>
 
@@ -84,6 +84,7 @@ export default function Book({ poems, onClose }) {
 
       <div className="book-controls">
         <button
+          type="button"
           className="nav-btn"
           onClick={goPrev}
           disabled={currentPage === 0}
@@ -98,6 +99,7 @@ export default function Book({ poems, onClose }) {
 
         {currentPage === maxPage ? (
           <button
+            type="button"
             className="nav-btn nav-btn--close"
             onClick={handleCloseBook}
             aria-label="إغلاق الكتاب"
@@ -106,6 +108,7 @@ export default function Book({ poems, onClose }) {
           </button>
         ) : (
           <button
+            type="button"
             className="nav-btn"
             onClick={goNext}
             disabled={currentPage === maxPage}

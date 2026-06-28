@@ -4,6 +4,7 @@ export default function BookCover({ onOpen, isOpening }) {
   return (
     <div className={`cover-scene ${isOpening ? "is-opening" : ""}`}>
       <button
+        type="button"
         className="cover"
         onClick={onOpen}
         aria-label="افتحي الكتاب"
