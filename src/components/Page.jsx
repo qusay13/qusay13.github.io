@@ -36,6 +36,14 @@ function PageContent({ content, totalPages }) {
         {content.lines.map((line, idx) => {
           const text = typeof line === "object" ? line.text : line;
           const isQuote = typeof line === "object" ? line.isQuote : false;
+          const isHtml = typeof line === "object" ? line.isHtml : false;
+          
+          if (isHtml) {
+            return (
+              <p key={idx} className={`page-poem-line ${isQuote ? "page-poem-line--quote" : ""}`} dangerouslySetInnerHTML={{ __html: text }} />
+            );
+          }
+          
           return (
             <p key={idx} className={`page-poem-line ${isQuote ? "page-poem-line--quote" : ""}`}>
               {text}
