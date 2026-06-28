@@ -1,0 +1,134 @@
+.page {
+  position: absolute;
+  top: 0;
+  right: 0; /* الكعب من جهة اليمين في الكتاب RTL */
+  width: 100%;
+  height: 100%;
+  transform-origin: right center;
+  transform-style: preserve-3d;
+  transition: transform 0.85s cubic-bezier(0.45, 0.05, 0.15, 1), opacity 0.8s ease;
+  transform: rotateY(0deg);
+  will-change: transform, opacity;
+}
+
+.page--flipped {
+  transform: rotateY(-135deg);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.page--interactive {
+  cursor: pointer;
+}
+
+.page-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  background: var(--paper);
+  box-shadow: inset 0 0 30px rgba(180, 140, 150, 0.06);
+  display: flex;
+}
+
+.page-face--front {
+  border-radius: 4px;
+}
+
+.page-face--back {
+  display: none; /* No back face in single page layout */
+}
+
+/* ظل خفيف يتحرك مع دوران الورقة لإحساس عمق */
+.page::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to left,
+    rgba(140, 90, 100, 0.16) 0%,
+    rgba(140, 90, 100, 0.03) 12%,
+    transparent 30%
+  );
+  opacity: 1;
+  transition: opacity 0.85s ease;
+}
+.page--flipped::after {
+  opacity: 0;
+}
+
+.page-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: clamp(28px, 5vw, 44px) clamp(24px, 4.5vw, 38px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(ellipse at top right, rgba(136, 14, 79, 0.04), transparent 55%),
+    repeating-linear-gradient(0deg, rgba(136, 14, 79, 0.015) 0px, transparent 1px, transparent 26px);
+  border: 1px solid rgba(201, 160, 99, 0.3); /* Gold border */
+  box-shadow: inset 0 0 40px rgba(136, 14, 79, 0.03);
+  overflow-y: auto;
+}
+
+.page-inner::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(201, 160, 99, 0.5); /* Inner gold border */
+  pointer-events: none;
+}
+
+.page-inner--blank {
+  background-image: radial-gradient(ellipse at top right, rgba(136, 14, 79, 0.03), transparent 60%);
+}
+
+.page-ornament {
+  color: var(--rose-mid);
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+  opacity: 0.85;
+}
+
+.page-poem-title {
+  font-family: var(--font-display);
+  font-style: normal;
+  font-weight: 700;
+  font-size: clamp(1.4rem, 4.5vw, 1.8rem);
+  color: var(--ink);
+  margin: 0 0 18px;
+  text-shadow: 0 1px 2px rgba(136, 14, 79, 0.1);
+}
+
+.page-poem-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-family: var(--font-arabic);
+  font-size: clamp(0.95rem, 2.6vw, 1.12rem);
+  line-height: 2.1;
+  color: var(--ink);
+}
+
+.page-poem-line {
+  margin: 0;
+}
+
+.page-number {
+  margin-top: auto;
+  padding-top: 16px;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 480px) {
+  .page-poem-body {
+    line-height: 1.9;
+  }
+}

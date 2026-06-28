@@ -1,0 +1,59 @@
+:root {
+  /* — لوحة الألوان — */
+  --rose-deep: #880E4F;
+  --rose-mid: #F8BBD0;
+  --rose-pale: #FCE4EC;
+  --blush-bg: #FFFFFF;
+  --paper: #FFFFFF;
+  --paper-shade: #FCE4EC;
+  --gold: #c9a063;
+  --gold-soft: #e3cda0;
+  --ink: #880E4F;
+  --ink-soft: #a83d6a;
+
+  --font-display: "Cormorant Garamond", serif;
+  --font-body: "Lora", serif;
+  --font-arabic: "Amiri", serif;
+
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--blush-bg);
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

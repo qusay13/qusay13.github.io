@@ -1,0 +1,160 @@
+.book-scene {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+  max-width: 760px;
+  padding: 0 16px;
+}
+
+.book {
+  position: relative;
+  width: min(480px, 92vw);
+  height: min(600px, 75vh);
+  perspective: 2400px;
+  background: var(--paper-shade);
+  border-radius: 8px;
+  box-shadow:
+    -6px 0 0 -2px var(--paper),
+    -12px 0 0 -4px var(--paper-shade),
+    0 36px 70px -24px rgba(136, 14, 79, 0.4),
+    0 10px 24px -10px rgba(136, 14, 79, 0.25);
+}
+
+.book-scene.is-closing .book {
+  animation: closeBookAnim 1.2s forwards cubic-bezier(0.65, 0, 0.35, 1);
+}
+.book-scene.is-closing .book-controls {
+  animation: fadeOut 0.5s forwards ease;
+}
+
+@keyframes closeBookAnim {
+  0% { transform: scale(1) translateY(0) rotateX(0); opacity: 1; }
+  100% { transform: scale(0.85) translateY(40px) rotateX(10deg); opacity: 0; pointer-events: none; }
+}
+@keyframes fadeOut {
+  to { opacity: 0; pointer-events: none; }
+}
+
+.book-spine-shadow {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 100%;
+  width: 36px;
+  margin-right: -36px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(120, 70, 85, 0.18) 50%,
+    transparent
+  );
+  z-index: 50;
+  pointer-events: none;
+}
+
+.book-ribbon-mark {
+  position: absolute;
+  top: -4px;
+  right: 16px;
+  width: 16px;
+  height: 46px;
+  background: linear-gradient(180deg, var(--gold) 0%, var(--gold-soft) 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%);
+  box-shadow: 0 3px 8px rgba(120, 70, 30, 0.25);
+  z-index: 60;
+  pointer-events: none;
+}
+
+.close-btn {
+  position: absolute;
+  top: -46px;
+  left: 0;
+  border: none;
+  background: rgba(255, 255, 255, 0.6);
+  color: var(--ink);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.9);
+  transform: scale(1.06);
+}
+
+.book-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: min(480px, 92vw);
+}
+
+.nav-btn {
+  border: 1.5px solid var(--rose-mid);
+  background: rgba(255, 255, 255, 0.55);
+  color: var(--ink);
+  font-family: var(--font-arabic);
+  font-size: 0.92rem;
+  padding: 9px 18px;
+  border-radius: 30px;
+  white-space: nowrap;
+  transition: background 0.2s ease, transform 0.15s ease, border-color 0.2s ease;
+}
+.nav-btn:hover:not(:disabled) {
+  background: var(--rose-pale);
+  border-color: var(--rose-deep);
+}
+.nav-btn:active:not(:disabled) {
+  transform: scale(0.96);
+}
+.nav-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.nav-btn--close {
+  background: var(--rose-deep);
+  color: var(--blush-bg);
+  border-color: var(--rose-deep);
+  font-weight: bold;
+}
+.nav-btn--close:hover {
+  background: var(--ink-soft);
+  border-color: var(--ink-soft);
+  color: var(--paper);
+}
+
+.progress-track {
+  flex: 1;
+  height: 4px;
+  background: rgba(216, 138, 163, 0.25);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--rose-deep), var(--gold-soft));
+  border-radius: 4px;
+  transition: width 0.6s ease;
+}
+
+@media (max-width: 480px) {
+  .book {
+    height: min(580px, 75vh);
+  }
+  .nav-btn {
+    font-size: 0.82rem;
+    padding: 8px 13px;
+  }
+  .close-btn {
+    top: -42px;
+  }
+}
